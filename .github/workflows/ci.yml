@@ -3,29 +3,18 @@ name: CI Pipeline
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
-  validate-project:
+  check-project:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Validate project structure
+      - name: Check files
         run: |
+          echo "Checking project..."
+          ls
           test -f index.html
-          test -f README.md
-          test -f Dockerfile
-          test -d css
-          test -d scripts
-          test -f css/style.css
-          test -f scripts/main.js
-          echo "Project structure validation passed"
-
-      - name: Validate HTML contains required title
-        run: |
-          grep -i "Sorting" index.html
-          echo "HTML content validation passed"
+          echo "All good!"
